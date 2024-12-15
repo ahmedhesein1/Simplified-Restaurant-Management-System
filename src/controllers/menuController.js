@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
-import Menu from "../models/menu.js";
 import AppError from "../utils/AppError.js";
-const { Op } = require("sequelize");
+import { Order, MenuOrder, Staff, Menu } from "../models/associations.js";
 
 // Create a new menu item
 export const createMenuItem = asyncHandler(async (req, res) => {
@@ -98,66 +97,3 @@ export const createBulkMenus = asyncHandler(async (req, res) => {
     message: `${createdMenus.length} menu items added successfully!`,
   });
 });
-
-const { Order, Menu, MenuOrder } = require("./models"); // Adjust with your actual paths
-
-async function exportTopSellingItems() {
-  // Get the date 30 days ago from today
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-  try {
-    // Aggregate the top 10 selling items
-    const topSellingItems = await Menu.findAll({
-      attributes: [
-        "id",
-        "name",
-        [
-          Sequelize.fn("COUNT", Sequelize.col("MenuOrders.menuId")),
-          "orderCount",
-        ],
-      ],
-      include: [
-        {
-          model: MenuOrder,
-          attributes: [], // Don't need extra attributes from the join table
-          where: {
-            "$MenuOrder.Order.createdAt$": {
-              [Op.gte]: thirtyDaysAgo, // Filter orders in the last 30 days
-            },
-          },
-          required: true, // Ensures only menu items that have been ordered are included
-        },
-      ],
-      group: ["Menu.id"],
-      order: [[Sequelize.col("orderCount"), "DESC"]], // Sort by the count in descending order
-      limit: 10, // Top 10 items
-    });
-
-    // Format the results for export (CSV, JSON, etc.)
-    const formattedResults = topSellingItems.map((item) => ({
-      id: item.id,
-      name: item.name,
-      orderCount: item.dataValues.orderCount,
-    }));
-
-    // Export (example: to CSV)
-    const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-    const csvWriter = createCsvWriter({
-      path: "top_selling_items.csv",
-      header: [
-        { id: "id", title: "ID" },
-        { id: "name", title: "Item Name" },
-        { id: "orderCount", title: "Orders Count" },
-      ],
-    });
-
-    await csvWriter.writeRecords(formattedResults);
-    console.log("CSV file created with top 10 selling items.");
-  } catch (error) {
-    console.error("Error fetching top selling items:", error);
-  }
-}
-
-// Call the function
-exportTopSellingItems();
