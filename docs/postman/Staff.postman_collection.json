@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "d6e4a7b8-cd40-4565-87b2-5bc4c9e54728",
+		"name": "Staff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32253863"
+	},
+	"item": [
+		{
+			"name": "Get All Staff",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/staff",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"staff"
+					]
+				},
+				"description": "Get All Staff Members (You need To be an Admin)"
+			},
+			"response": []
+		},
+		{
+			"name": "Make Staff Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"6\",\r\n    \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/make-admin",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"make-admin"
+					]
+				},
+				"description": "If You Are An Admin You Can Make another user admin too"
+			},
+			"response": []
+		}
+	]
+}

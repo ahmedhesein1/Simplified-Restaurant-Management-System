@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "9f4b5ff0-f905-42fb-b805-cc1e5cb2c03f",
+		"name": "Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32253863"
+	},
+	"item": [
+		{
+			"name": "Add Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"staffId\": \"1\", // ID of the staff creating the order\r\n  \"menuItems\": [\r\n    {\r\n      \"menuId\": \"10\", // ID of the menu item\r\n      \"quantity\": 2    // Quantity of the menu item\r\n    },\r\n    {\r\n      \"menuId\": \"20\",\r\n      \"quantity\": 1\r\n    }\r\n  ]\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/order",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Item to Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"orderId\": \"123\",  // ID of the existing order\r\n  \"menuId\": \"10\",    // ID of the menu item to add\r\n  \"quantity\": 3      // Quantity of the menu item to add\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/order/add-item",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"order",
+						"add-item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Item from Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"orderId\": \"123\",  // ID of the existing order\r\n  \"menuId\": \"10\"     // ID of the menu item to remove\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/order",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mark As Completed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"orderId\": \"123\" // ID of the order to mark as completed\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/order",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"staffId\": 1,\r\n  \"menuItems\": [\r\n    { \"menuId\": 1, \"quantity\": 2 },\r\n    { \"menuId\": 2, \"quantity\": 1 }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/order",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"description": "StartFragment\n\n### **Get Order Analytics (Optional Export)**\n\n**Endpoint**: `GET /orders/analytics`\n\n#### **Query Parameters**:\n\n- `startDate`: Start date for the analytics (e.g., `2024-12-01`).\n    \n- `endDate`: End date for the analytics (e.g., `2024-12-31`).\n    \n- `exportFormat` (optional): Either `\"csv\"` or `\"xlsx\"`.\n    \n\n#### Example URL:\n\n``` antlr4\nGET /orders/analytics?startDate=2024-12-01&endDate=2024-12-31&exportFormat=csv\n\n ```\n\nEndFragment"
+			},
+			"response": []
+		}
+	]
+}

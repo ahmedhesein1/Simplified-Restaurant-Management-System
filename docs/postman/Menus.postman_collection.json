@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "ad40f11e-7c1b-4436-a776-b63df4076738",
+		"name": "Menus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32253863"
+	},
+	"item": [
+		{
+			"name": "Create a new menu item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Chicken Wings\",\r\n    \"description\": \"Crispy chicken wings served with your choice of dipping sauce.\",\r\n    \"price\": 9.99,\r\n    \"category\": \"Appetizer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/menu",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"menu"
+					]
+				},
+				"description": "Create New Menu Item\n\nAdmins Only\n\nExpected Response\n\n``` json\n{\n    \"success\": true,\n    \"message\": \"Menu item created successfully\",\n    \"menuItem\": {\n        \"id\": 1,\n        \"name\": \"Chicken Wings\",\n        \"description\": \"Crispy chicken wings served with your choice of dipping sauce.\",\n        \"price\": 9.99,\n        \"category\": \"Appetizer\",\n        \"updatedAt\": \"2024-12-15T21:56:19.956Z\",\n        \"createdAt\": \"2024-12-15T21:56:19.956Z\"\n    }\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all menu items (filter/sort)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/menu",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"menu"
+					]
+				},
+				"description": "Get All Menu Items"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a single menu item by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/menu",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"menu"
+					]
+				},
+				"description": "Get A single Menu Item by putting its Id As a parameter"
+			},
+			"response": []
+		},
+		{
+			"name": "Update a menu item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Updated Menu Item Name\",\r\n  \"description\": \"Updated description of the menu item\",\r\n  \"price\": 12.99,\r\n  \"category\": \"Updated Category\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/menu/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"menu",
+						"1"
+					]
+				},
+				"description": "update Menu Item by putting its Id in the Request body\n\nExpected Response\n\n``` json\n{\n    \"success\": true,\n    \"message\": \"Menu item updated successfully\",\n    \"menuItem\": {\n        \"id\": 1,\n        \"name\": \"Updated Menu Item Name\",\n        \"description\": \"Updated description of the menu item\",\n        \"price\": 12.99,\n        \"category\": \"Updated Category\",\n        \"createdAt\": \"2024-12-15T21:56:19.956Z\",\n        \"updatedAt\": \"2024-12-16T10:19:25.179Z\"\n    }\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a menu item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/menu/1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"menu",
+						"1"
+					]
+				},
+				"description": "Delete Menu Item by putting its Id As a parameter\n\nExpected Response\n\n``` json\n{\n    \"success\": true,\n    \"message\": \"Menu item deleted successfully\"\n}\n\n ```"
+			},
+			"response": []
+		}
+	]
+}
