@@ -9,7 +9,7 @@ router
   .post(orderController.createOrder);
 router.post("/add-item", orderController.addItemToOrder);
 router.post("/remove-item", orderController.removeItemFromOrder);
-router.get("/complete", orderController.completeOrder);
+router.post("/complete", orderController.completeOrder);
 // Endpoint for analytics
 router.get("/analytics", orderController.getOrderAnalytics);
 

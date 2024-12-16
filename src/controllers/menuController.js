@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import AppError from "../utils/AppError.js";
 import { Order, MenuOrder, Staff, Menu } from "../models/associations.js";
+import sequelize from "../config/db.js";
 
 // Create a new menu item
 export const createMenuItem = asyncHandler(async (req, res) => {
@@ -85,15 +86,5 @@ export const deleteMenuItem = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Menu item deleted successfully",
-  });
-});
-// Create multiple menu items
-export const createBulkMenus = asyncHandler(async (req, res) => {
-  const menus = req.body; // Expecting an array of menus
-  const createdMenus = await Menu.bulkCreate(menus);
-
-  res.status(201).json({
-    success: true,
-    message: `${createdMenus.length} menu items added successfully!`,
   });
 });

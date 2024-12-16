@@ -16,7 +16,7 @@ router
 router
   .route("/:id")
   .get(menuController.getMenuItemById) // Public route
-  .patch(
+  .post(
     authController.protect,
     authController.authorize(["admin"]),
     menuController.updateMenuItem
@@ -26,11 +26,5 @@ router
     authController.authorize(["admin"]),
     menuController.deleteMenuItem
   ); // Admin only
-router.post(
-  "/bulk",
-  authController.protect,
-  authController.authorize(["admin"]),
-  menuController.createBulkMenus
-); // Admin only
 
 export default router;
