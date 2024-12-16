@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import AppError from "../utils/AppError.js";
 import { Order, MenuOrder, Staff, Menu } from "../models/associations.js";
-import sequelize from "../config/db.js";
 
 // Create a new menu item
 export const createMenuItem = asyncHandler(async (req, res) => {
