@@ -31,11 +31,14 @@ export const signup = asyncHandler(async (req, res, next) => {
   if (staff) return next(new AppError("User already exists", 400));
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  // Check if this is the first user
+  const isFirstUser = (await Staff.count()) === 0;
+
   const newStaff = await Staff.create({
     name,
     email,
     password: hashedPassword,
-    role: "staff",
+    role: isFirstUser ? "admin" : "staff", // Assign 'admin' role to the first user
   });
   res.status(201).json({
     success: true,
